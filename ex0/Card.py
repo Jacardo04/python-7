@@ -32,5 +32,5 @@ class Card(ABC):
     def is_playable(self, available_mana: int) -> bool:
         """checks if u have enough mana to play the card"""
         if not isinstance(available_mana, int) or available_mana < 0:
-            raise ValueError("MANA can never be negative")
+            raise ValueError("MANA can never be negative or must be an int")
         return available_mana >= self.cost
