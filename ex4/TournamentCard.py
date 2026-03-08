@@ -6,13 +6,14 @@ from ex4.Rankable import Rankable
 class TournamentCard(Card, Combatable, Rankable):
 
     def __init__(self, name: str, cost: int, rarity: str, attack: int,
-                 health: int):
+                 health: int, rating: int):
         super().__init__(name, cost, rarity)
         self.attack_power = attack
         self.health = health
         self.wins = 0
         self.losses = 0
         self.type = "Tournament"
+        self.rating = rating
 
     # Card method
     def play(self, game_state: dict) -> dict:
@@ -41,7 +42,8 @@ class TournamentCard(Card, Combatable, Rankable):
         return {"attack": self.attack_power, "health": self.health}
 
     def calculate_rating(self) -> int:
-        return self.wins * 10 - self.losses * 5
+        base_rating = self.rating  # initial rating
+        return base_rating + 16 * (self.wins - self.losses)
 
     def update_wins(self, wins: int) -> None:
         self.wins += wins
