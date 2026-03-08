@@ -7,7 +7,7 @@ class Card(ABC):
         if not isinstance(name, str) or not name:
             raise ValueError("Card name must exist cannot be empty.")
 
-        if not isinstance(name, str) or not name:
+        if not isinstance(cost, int) or not cost:
             raise ValueError("Card cannot have negative cost.")
 
         if not isinstance(rarity, str) or not rarity:
@@ -15,6 +15,12 @@ class Card(ABC):
         self.name = name
         self.cost = cost
         self.rarity = rarity
+
+    def __str__(self):
+        return f"{self.name} ({self.cost})"
+
+    def __repr__(self):
+        return self.__str__()
 
     @abstractmethod
     def play(self, game_state: Dict) -> Dict:
